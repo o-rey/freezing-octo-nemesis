@@ -19,7 +19,7 @@ function fact($value)
  */
 function get_min_element($bitcount)
 {
-	return (1 << (int)$bitcount) - 1;
+    return (1 << (int)$bitcount) - 1;
 }
 
 /**
@@ -30,7 +30,7 @@ function get_min_element($bitcount)
  */
 function get_max_element($bitcount, $capacity)
 {
-	return ((1 << (int)$bitcount) - 1) << ((int)$capacity - (int)$bitcount);
+    return ((1 << (int)$bitcount) - 1) << ((int)$capacity - (int)$bitcount);
 }
 
 /**
@@ -46,24 +46,24 @@ function get_max_element($bitcount, $capacity)
  */
 function get_next_permutation($x)
 {
-     if ($x == 0) return 0;
-     $smallest     = ($x & -$x);
-     $ripple       = $x + $smallest;
-     $new_smallest = ($ripple & -$ripple); // cool hack
-     $ones         = (($new_smallest / $smallest) >> 1) - 1;
-     return $ripple | $ones;
+    if ($x == 0) return 0;
+    $smallest     = ($x & -$x);
+    $ripple       = $x + $smallest;
+    $new_smallest = ($ripple & -$ripple); // cool hack
+    $ones         = (($new_smallest / $smallest) >> 1) - 1;
+    return $ripple | $ones;
 }
 
 while (!$fieldsCount = abs((int)readline('Fields count:'))) {
-	echo "Please enter a non-zero number of fields\n";
+    echo "Please enter a non-zero number of fields\n";
 };
 
 while (!$chipsCount = abs((int)readline('Chips count:'))) {
-	echo "Please enter a non-zero number of chips\n";
+    echo "Please enter a non-zero number of chips\n";
 };
 
 if ($chipsCount > $fieldsCount) {
-	die("This ain't gonna fit\n");
+    die("This ain't gonna fit\n");
 }
 
 echo "Placing $chipsCount chips on $fieldsCount fields\n";
@@ -82,14 +82,14 @@ $count = fact($fieldsCount) / (fact($chipsCount) * fact($fieldsCount - $chipsCou
 $f = fopen('./result.txt', 'w');
 
 if ($count < 10) {
-	fwrite($f, 'менее 10 вариантов');
+    fwrite($f, 'менее 10 вариантов');
 } else {
-	fwrite($f, $count . "\n");
-	while ($value <= $max) {
-		fwrite($f, sprintf($mask, $value) . "\n");
-		$value = get_next_permutation($value);
-		// $count++;
-	}
+    fwrite($f, $count . "\n");
+    while ($value <= $max) {
+        fwrite($f, sprintf($mask, $value) . "\n");
+        $value = get_next_permutation($value);
+        // $count++;
+    }
 }
 
 fclose($f);
